@@ -2,11 +2,11 @@ import { Component, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 enum fields {
-  LABEL,
-  TEXT,
-  EMAIL,
-  PASSWORD,
-  TEXTAREA
+  LABEL = 'label',
+  TEXT = 'text',
+  EMAIL = 'email',
+  PASSWORD = 'password',
+  TEXTAREA = 'textarea'
 }
 
 @Component({
@@ -36,10 +36,27 @@ export class AppComponent {
   }
   createFormFields() {
     if ( this.selectedFieldsName === fields.TEXT) {
-      this.formGroups.text = new FormControl();
+      this.createTextField('data');
     }
+    if ( this.selectedFieldsName === fields.TEXTAREA) {
+      this.createTextAreaField('data');
+    }
+
+
+  }
+
+  createTextField(data) {
+    this.formGroups.text = new FormControl();
     const div = this.renderer.createElement('div');
-    const text = this.renderer.createText('This is div element');
+    const text = this.renderer.createText('This is text element');
+    this.renderer.appendChild(div, text);
+    this.renderer.appendChild(this.playground.nativeElement, div);
+  }
+
+  createTextAreaField(data) {
+    this.formGroups.text = new FormControl();
+    const div = this.renderer.createElement('div');
+    const text = this.renderer.createText('This is textarea element');
     this.renderer.appendChild(div, text);
     this.renderer.appendChild(this.playground.nativeElement, div);
   }
