@@ -18,16 +18,16 @@
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
             <select (change)="selectedFiled($event)" [disabled]="!isFormCreated" name="" id="input${1/(\w+)/\u\1/g}" class="form-control" required="required">
-        <option value="label">Create label field</option>
+        <option value="label" disabled='true'>Create label field</option>
         <option value="text">Create text field</option>
-        <option value="email">Create email field</option>
+        <option value="email" disabled='true'>Create email field</option>
         <option value="textarea">Create textarea field</option>
         <option value="radio">Create radio button</option>
-        <option value="password">Create password field</option>
+        <option value="password" disabled='true'>Create password field</option>
       </select>
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            <button type="button" (click)="createFormFields()" class="btn btn-default">Add Fields</button>
+            <button type="button" (click)="createFormFields()" [disabled]="!isSelectedField" class="btn btn-default">Add Fields</button>
 
         </div>
     </div>
@@ -42,3 +42,4 @@
 
 
 </div>
+<!-- <button type="button" class="btn btn-primary" (click)="openModalWithComponent()">Create modal with component</button> -->

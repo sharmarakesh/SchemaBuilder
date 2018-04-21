@@ -1,0 +1,106 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+    <!-- text box -->
+    <form [formGroup]="textFormGroup">
+        <div *ngIf="elementTobeCreated === 'text'">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="frmid">ID: </label>
+                    <input type="text" name="frmid" id="frmid" formControlName="id" class="form-control" value="" required="required" pattern="" title="">
+                </div>
+                <div class="col-md-6">
+                    <label for="frmname">NAME: </label>
+                    <input type="text" name="frmname" id="frmname" class="form-control" formControlName="name" value="" required="required" pattern="" title="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="frmwidth">WIDTH: </label>
+                    <input type="number" name="frmwidth" id="frmwidth" formControlName="width" class="form-control" value="" required="required" pattern="" title="">
+                </div>
+                <div class="col-md-6">
+                    <label for="frmheight">HEIGHT: </label>
+                    <input type="number" name="frmheight" id="frmheight" formControlName="height" class="form-control" value="" required="required" pattern="" title="">
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- email box -->
+    <form [formGroup]="textAreaFormGroup">
+        <div *ngIf="elementTobeCreated === 'textarea'">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="frmid">ID: </label>
+                    <input type="text" name="frmid" id="frmid" formControlName="id" class="form-control" value="" required="required" pattern="" title="">
+                </div>
+                <div class="col-md-6">
+                    <label for="frmname">NAME: </label>
+                    <input type="text" name="frmname" id="frmname" formControlName="name" class="form-control" value="" required="required" pattern="" title="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="frmwidth">WIDTH: </label>
+                    <input type="number" name="frmwidth" id="frmwidth" formControlName="width" class="form-control" value="" required="required" pattern="" title="">
+                </div>
+                <div class="col-md-6">
+                    <label for="frmheight">HEIGHT: </label>
+                    <input type="number" name="frmheight" id="frmheight" formControlName="height" class="form-control" value="" required="required" pattern="" title="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="frmrows">ROWS: </label>
+                    <input type="number" name="frmrows" id="frmrows" formControlName="rows" class="form-control" value="" required="required" pattern="" title="">
+                </div>
+                <div class="col-md-6">
+                    <label for="frmcols">COLS: </label>
+                    <input type="number" name="frmcols" id="frmcols" formControlName="cols" class="form-control" value="" required="required" pattern="" title="">
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- radio button -->
+    <form [formGroup]="radioFormGroup">
+        <div *ngIf="elementTobeCreated === 'radio'">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="frmname">NAME: </label>
+                    <input type="text" name="frmname" id="frmname" formControlName="name" class="form-control" value="" required="required" pattern="" title="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-default" (click)="addRadioButtonValues()">ADD VALUE FOR RADIO BUTTONS</button>
+                    <div *ngFor="let vl of values; let i=index">
+                        <label for="frmwidth">VALUE {{i+1}}: </label>
+                        <input type="text" name="frmvalue{{i+1}}" id="frmvalue{{i+1}}" class="form-control" value="" required="required" pattern="" title="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+
+    <button type="button" class="btn btn-default" (click)="createElement()">Add Element</button>
+
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{closeBtnName}}</button>
+</div>
+
+<!--
+<textarea name="message" style="width:200px; height:600px">
+    The cat was playing in the garden.
+    </textarea> -->
+
+
+<!-- <input type="radio" name="gender" value="male" checked> Male<br>
+<input type="radio" name="gender" value="female"> Female<br>
+<input type="radio" name="gender" value="other"> Other -->
