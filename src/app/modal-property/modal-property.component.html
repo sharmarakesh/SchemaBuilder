@@ -6,8 +6,9 @@
 </div>
 <div class="modal-body">
     <!-- text box -->
-    <form [formGroup]="textFormGroup">
-        <div *ngIf="elementTobeCreated === 'text'">
+
+    <div *ngIf="elementTobeCreated === 'text'">
+        <form [formGroup]="textFormGroup">
             <div class="row">
                 <div class="col-md-6">
                     <label for="frmid">ID: </label>
@@ -28,12 +29,14 @@
                     <input type="number" name="frmheight" id="frmheight" formControlName="height" class="form-control" value="" required="required" pattern="" title="">
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
+
 
     <!-- email box -->
-    <form [formGroup]="textAreaFormGroup">
-        <div *ngIf="elementTobeCreated === 'textarea'">
+
+    <div *ngIf="elementTobeCreated === 'textarea'">
+        <form [formGroup]="textAreaFormGroup">
             <div class="row">
                 <div class="col-md-6">
                     <label for="frmid">ID: </label>
@@ -64,12 +67,14 @@
                     <input type="number" name="frmcols" id="frmcols" formControlName="cols" class="form-control" value="" required="required" pattern="" title="">
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
+
 
     <!-- radio button -->
-    <form [formGroup]="radioFormGroup">
-        <div *ngIf="elementTobeCreated === 'radio'">
+
+    <div *ngIf="elementTobeCreated === 'radio'">
+        <form [formGroup]="radioFormGroup">
             <div class="row">
                 <div class="col-md-12">
                     <label for="frmname">NAME: </label>
@@ -85,16 +90,16 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
+
 </div>
 <div class="modal-footer">
 
-    <button type="button" class="btn btn-default" (click)="createElement()">Add Element</button>
+    <button type="button" class="btn btn-default" (click)="createElement()" [disabled]="getDisableState()">Add Element</button>
 
     <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{closeBtnName}}</button>
 </div>
-
 <!--
 <textarea name="message" style="width:200px; height:600px">
     The cat was playing in the garden.

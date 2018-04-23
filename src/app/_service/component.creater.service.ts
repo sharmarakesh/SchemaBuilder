@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ComponentCreaterService {
-  private elementTobeCreated: any;
+  private elementTobeCreated: any = [];
 
-  public get getElementTobeCreated () {
+  public getElementTobeCreated (): any {
     return this.elementTobeCreated;
   }
 
-  public set setElementTobeCreated (element: any) {
-    this.elementTobeCreated = element;
+  public setElementTobeCreated (element: any) {
+    this.elementTobeCreated.push(element);
   }
 
   constructor() {}

@@ -4,7 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalPropertyComponent } from './modal-property/modal-property.component';
 import { ComponentCreaterService } from './_service/component.creater.service';
-import { TextBoxModel } from './_service/_model/_textbox';
+import { TextBoxModel } from './_model/_textbox';
 
 enum fields {
   LABEL = 'label',
@@ -36,6 +36,9 @@ export class AppComponent {
   @ViewChild('playground')
    private playground: ElementRef;
 
+   @ViewChild('finalElements')
+    private finalElements: ElementRef;
+
    bsModalRef: BsModalRef;
   message: string;
 
@@ -50,6 +53,10 @@ export class AppComponent {
      private modalService: BsModalService,
     private componentCreaterService: ComponentCreaterService) {}
 
+    showComponent() {
+      // const aa: any[] =  this.componentCreaterService.getElementTobeCreated();
+      console.log('FINAL OBJECT : ', this.componentCreaterService.getElementTobeCreated());
+    }
   createForm() {
     this.myDynamicForm = new FormGroup(this.formGroups);
     this.isFormCreated = true;
@@ -105,7 +112,7 @@ export class AppComponent {
   }
 
   openModalWithComponent(type: string, initialState) {
-    console.log(type);
+    // console.log(type);
 
 
     const config = {
