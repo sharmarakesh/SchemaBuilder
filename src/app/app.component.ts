@@ -53,10 +53,7 @@ export class AppComponent {
      private modalService: BsModalService,
     private componentCreaterService: ComponentCreaterService) {}
 
-    showComponent() {
-      // const aa: any[] =  this.componentCreaterService.getElementTobeCreated();
-      console.log('FINAL OBJECT : ', this.componentCreaterService.getElementTobeCreated());
-    }
+
   createForm() {
     this.myDynamicForm = new FormGroup(this.formGroups);
     this.isFormCreated = true;
@@ -132,4 +129,39 @@ export class AppComponent {
     this.message = 'Declined!';
     this.bsModalRef.hide();
   }
+
+  showComponent() {
+    // const aa: any[] =  this.componentCreaterService.getElementTobeCreated();
+    // console.log('FINAL OBJECT : ', this.componentCreaterService.getElementTobeCreated());
+
+    this.componentCreaterService.getElementTobeCreated().forEach(element => {
+      console.log(element);
+      if (element.type === fields.TEXT) {
+        const elem = this.renderer.createElement('input');
+        this.renderer.setStyle(elem, 'height', element.height + 'px');
+        this.renderer.setStyle(elem, 'width', element.width + 'px');
+        this.renderer.addClass(elem, 'form-control');
+        elem.setAttribute('type', element.type);
+        elem.setAttribute('name', element.name);
+        this.renderer.appendChild(this.finalElements.nativeElement, elem);
+      }
+
+      if (element.type === fields.TEXTAREA) {
+        const elem = this.renderer.createElement(fields.TEXTAREA);
+        this.renderer.setAttribute(elem, 'id', element.id);
+        this.renderer.setAttribute(elem, 'name', element.name);
+        this.renderer.setAttribute(elem, 'cols', elem.cols);
+        this.renderer.setAttribute(elem, 'rows', elem.rows);
+        this.renderer.setStyle(elem, 'height', element.height + 'px');
+        this.renderer.setStyle(elem, 'width', element.width + 'px');
+        this.renderer.addClass(elem, 'form-control');
+        this.renderer.appendChild(this.finalElements.nativeElement, elem);
+      }
+    });
+
+    this.componentCreaterService.clearElementTobeCreatedArray([]);
+
+
+  }
+
 }

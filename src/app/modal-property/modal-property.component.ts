@@ -67,6 +67,7 @@ export class ModalPropertyComponent implements OnInit {
       this.componentCreaterService.setElementTobeCreated(textAreaObj);
   }
     // console.log('OBJECT : ', this.finalObjectTobeConverted);
+    this.bsModalRef.hide();
   }
 
   getDisableState() {

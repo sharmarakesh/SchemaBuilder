@@ -12,6 +12,10 @@ export class ComponentCreaterService {
     this.elementTobeCreated.push(element);
   }
 
+  public clearElementTobeCreatedArray(emptyArray: any[]) {
+    this.elementTobeCreated = emptyArray;
+  }
+
   constructor() {}
 
 }
