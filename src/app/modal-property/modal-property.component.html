@@ -7,7 +7,7 @@
 <div class="modal-body">
     <!-- text box -->
 
-    <div *ngIf="elementTobeCreated === 'text'">
+    <!-- <div *ngIf="elementTobeCreated === 'text'">
         <form [formGroup]="textFormGroup">
             <div class="row">
                 <div class="col-md-6">
@@ -30,12 +30,12 @@
                 </div>
             </div>
         </form>
-    </div>
+    </div> -->
 
 
     <!-- email box -->
 
-    <div *ngIf="elementTobeCreated === 'textarea'">
+    <!-- <div *ngIf="elementTobeCreated === 'textarea'">
         <form [formGroup]="textAreaFormGroup">
             <div class="row">
                 <div class="col-md-6">
@@ -68,7 +68,7 @@
                 </div>
             </div>
         </form>
-    </div>
+    </div> -->
 
 
     <!-- radio button -->
@@ -77,17 +77,58 @@
         <form [formGroup]="radioFormGroup">
             <div class="row">
                 <div class="col-md-12">
-                    <label for="frmname">NAME: </label>
+                    <label for="frmname">Enter Name: </label>
                     <input type="text" name="frmname" id="frmname" formControlName="name" class="form-control" value="" required="required" pattern="" title="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="frmid">Enter Id: </label>
+                    <input type="text" name="frmid" id="frmid" formControlName="id" class="form-control" value="" placeholder="Please enter id" required="required" pattern="" title="">
+                </div>
+                <div class="col-md-6">
+                    <label for="frmname">Enter Label Value: </label>
+                    <input type="text" name="frmname" id="frmname" class="form-control" formControlName="label" value="" required="required" pattern="" title="">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <button type="button" class="btn btn-default" (click)="addRadioButtonValues()">ADD VALUE FOR RADIO BUTTONS</button>
-                    <div *ngFor="let vl of values; let i=index">
-                        <label for="frmwidth">VALUE {{i+1}}: </label>
-                        <input type="text" name="frmvalue{{i+1}}" id="frmvalue{{i+1}}" class="form-control" value="" required="required" pattern="" title="">
+                    <div formArrayName="radioOptions">
+                        <div *ngFor="let vl of radioOptions.controls; let i = index">
+                            <label for="frmwidth">VALUE {{i+1}}: </label>
+                            <input type="text" name="frmvalue{{i+1}}" id="frmvalue{{i+1}}" class="form-control" [formControlName]="i" value="" required="required" pattern="" title="">
+                        </div>
                     </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div *ngIf="elementTobeCreated === 'inputfield'">
+        <form [formGroup]="inputFormGroup">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="frmid">Select Input Type: </label>
+                    <select (change)="selectedInputOnChange($event)" formControlName="type" class="form-control">
+                        <option *ngFor="let opt of options" [value]="opt">{{ opt }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="frmid">Enter Id: </label>
+                    <input type="text" name="frmid" id="frmid" formControlName="id" class="form-control" value="" placeholder="Please enter id" required="required" pattern="" title="">
+                </div>
+                <div class="col-md-6">
+                    <label for="frmname">Enter Label Value: </label>
+                    <input type="text" name="frmname" id="frmname" class="form-control" formControlName="label" value="" required="required" pattern="" title="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="frmwidth">Enter Placeholder Value: </label>
+                    <input type="text" name="frmwidth" id="frmwidth" formControlName="placeholder" class="form-control" value="" required="required" pattern="" title="">
                 </div>
             </div>
         </form>
@@ -109,3 +150,15 @@
 <!-- <input type="radio" name="gender" value="male" checked> Male<br>
 <input type="radio" name="gender" value="female"> Female<br>
 <input type="radio" name="gender" value="other"> Other -->
+
+<!-- <div class="form-control radio-inline">
+    <label><input type="radio" name="optradio">Option 1</label>
+  </div>
+  <div class="radio-inline">
+    <label><input type="radio" name="optradio">Option 2</label>
+  </div> -->
+
+<!-- <button type="button" class="btn btn-default" (click)="onHobbiesAdded()">Add your hobbies</button>
+                    <div class="form-group" *ngFor="let hobbyControl of signupForm.get('hobbies').controls; let i = index;">
+                        <input type="text" [formControlName]="i" class="form-control">
+                    </div> -->

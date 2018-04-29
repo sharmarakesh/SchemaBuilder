@@ -8,6 +8,7 @@ import { TextBoxModel } from './_model/_textbox';
 
 enum fields {
   LABEL = 'label',
+  INPUTFIELD = 'inputfield',
   TEXT = 'text',
   EMAIL = 'email',
   PASSWORD = 'password',
@@ -29,9 +30,11 @@ export class AppComponent {
   title = 'app';
   formGroups: any = {};
   selectedFieldsName;
-  isSelectedField = false;
+  isSelectedField = true;
+  selectedInputValue: string;
 
   textBoxModel: TextBoxModel;
+  elements: any;
 
   @ViewChild('playground')
    private playground: ElementRef;
@@ -60,7 +63,7 @@ export class AppComponent {
 
   }
   selectedFiled(event) {
-    this.isSelectedField = true;
+    // this.isSelectedField = true;
     this.selectedFieldsName = event.target.value;
   }
   createFormFields() {
@@ -73,6 +76,16 @@ export class AppComponent {
     if ( this.selectedFieldsName === fields.RADIO) {
       this.createRadioField(this.selectedFieldsName);
     }
+
+    if ( this.selectedFieldsName === fields.INPUTFIELD ) {
+      this.createInputFields(this.selectedFieldsName);
+    }
+  }
+
+  createInputFields(data) {
+    this.initialState.title = 'Create input fields';
+    this.initialState.elementTobeCreated = data;
+    this.openModalWithComponent(data, this.initialState);
   }
 
   createTextField(data) {
@@ -132,31 +145,38 @@ export class AppComponent {
 
   showComponent() {
     // const aa: any[] =  this.componentCreaterService.getElementTobeCreated();
-    // console.log('FINAL OBJECT : ', this.componentCreaterService.getElementTobeCreated());
+    console.log('FINAL OBJECT : ', this.componentCreaterService.getElementTobeCreated());
+
 
     this.componentCreaterService.getElementTobeCreated().forEach(element => {
       console.log(element);
-      if (element.type === fields.TEXT) {
-        const elem = this.renderer.createElement('input');
-        this.renderer.setStyle(elem, 'height', element.height + 'px');
-        this.renderer.setStyle(elem, 'width', element.width + 'px');
-        this.renderer.addClass(elem, 'form-control');
-        elem.setAttribute('type', element.type);
-        elem.setAttribute('name', element.name);
-        this.renderer.appendChild(this.finalElements.nativeElement, elem);
-      }
+      this.elements = this.componentCreaterService.getElementTobeCreated();
+      // if ( element.type === fields.RADIO ) {
 
-      if (element.type === fields.TEXTAREA) {
-        const elem = this.renderer.createElement(fields.TEXTAREA);
-        this.renderer.setAttribute(elem, 'id', element.id);
-        this.renderer.setAttribute(elem, 'name', element.name);
-        this.renderer.setAttribute(elem, 'cols', elem.cols);
-        this.renderer.setAttribute(elem, 'rows', elem.rows);
-        this.renderer.setStyle(elem, 'height', element.height + 'px');
-        this.renderer.setStyle(elem, 'width', element.width + 'px');
-        this.renderer.addClass(elem, 'form-control');
-        this.renderer.appendChild(this.finalElements.nativeElement, elem);
-      }
+      // } else {
+      //   this.elements = this.componentCreaterService.getElementTobeCreated();
+      // }
+      // if (element.type === fields.TEXT) {
+      //   const elem = this.renderer.createElement('input');
+      //   this.renderer.setStyle(elem, 'height', element.height + 'px');
+      //   this.renderer.setStyle(elem, 'width', element.width + 'px');
+      //   this.renderer.addClass(elem, 'form-control');
+      //   elem.setAttribute('type', element.type);
+      //   elem.setAttribute('name', element.name);
+      //   this.renderer.appendChild(this.finalElements.nativeElement, elem);
+      // }
+
+      // if (element.type === fields.TEXTAREA) {
+      //   const elem = this.renderer.createElement(fields.TEXTAREA);
+      //   this.renderer.setAttribute(elem, 'id', element.id);
+      //   this.renderer.setAttribute(elem, 'name', element.name);
+      //   this.renderer.setAttribute(elem, 'cols', elem.cols);
+      //   this.renderer.setAttribute(elem, 'rows', elem.rows);
+      //   this.renderer.setStyle(elem, 'height', element.height + 'px');
+      //   this.renderer.setStyle(elem, 'width', element.width + 'px');
+      //   this.renderer.addClass(elem, 'form-control');
+      //   this.renderer.appendChild(this.finalElements.nativeElement, elem);
+      // }
     });
 
     this.componentCreaterService.clearElementTobeCreatedArray([]);

@@ -7,15 +7,18 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ModalPropertyComponent } from './modal-property/modal-property.component';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { ComponentCreaterService } from './_service/component.creater.service';
+import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ModalPropertyComponent
+    ModalPropertyComponent,
+    DynamicFormComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    FormsModule,
     NgbModule.forRoot(),
     ModalModule.forRoot()
   ],

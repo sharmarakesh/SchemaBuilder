@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef, Input } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { FormGroup, FormControl, Form } from '@angular/forms';
+import { FormGroup, FormControl, Form, FormArray, Validators } from '@angular/forms';
 import { ComponentCreaterService } from '../_service/component.creater.service';
 
 @Component({
@@ -20,12 +20,15 @@ export class ModalPropertyComponent implements OnInit {
   textFormGroup: FormGroup;
   textAreaFormGroup: FormGroup;
   radioFormGroup: FormGroup;
-
+  inputFormGroup: FormGroup;
+  selectedInputValue: string;
   finalObjectTobeConverted: any = [];
+  options = ['text', 'email', 'number', 'password', 'date', 'url', 'datetime-local', 'month'];
 
   constructor(public bsModalRef: BsModalRef, private componentCreaterService: ComponentCreaterService) {}
 
   ngOnInit() {
+    // this.closeBtnName = 'close';
     this.list.push('PROFIT!!!');
     this.textFormGroup = new FormGroup({
       id : new FormControl(),
@@ -45,27 +48,65 @@ export class ModalPropertyComponent implements OnInit {
     }
     );
 
+    this.inputFormGroup = new FormGroup({
+      type: new FormControl(),
+      id: new FormControl(),
+      label: new FormControl(),
+      placeholder: new FormControl()
+    });
+
     this.radioFormGroup = new FormGroup({
-      name: new FormControl()
+      'name': new FormControl(),
+      'type': new FormControl('radio'),
+      'id': new FormControl(),
+      'label': new FormControl(),
+      'radioOptions': new FormArray([])
     }
     );
   }
 
+
+  selectedInputOnChange(event) {
+    // console.log(event);
+    this.selectedInputValue = event.value;
+  }
+
+  get radioOptions(): FormArray {
+    return this.radioFormGroup.get('radioOptions') as FormArray;
+ }
+
   addRadioButtonValues() {
-    this.values.push('');
+    // this.values.push('');
+    const control = new FormControl();
+    (<FormArray>this.radioFormGroup.get('radioOptions')).push(control);
+  }
+  updateValue(event, i) {
+      this.values[i] = (<HTMLInputElement>event.target).value;
   }
 
   createElement() {
-    if ( this.elementTobeCreated === 'text') {
-        const textObj = this.textFormGroup.value;
-        textObj.type = this.elementTobeCreated;
-        this.componentCreaterService.setElementTobeCreated(textObj);
+  //   if ( this.elementTobeCreated === 'text') {
+  //       const textObj = this.textFormGroup.value;
+  //       textObj.type = this.elementTobeCreated;
+  //       this.componentCreaterService.setElementTobeCreated(textObj);
+  //   }
+  //   if ( this.elementTobeCreated === 'textarea') {
+  //     const textAreaObj = this.textAreaFormGroup.value;
+  //     textAreaObj.type = this.elementTobeCreated;
+  //     this.componentCreaterService.setElementTobeCreated(textAreaObj);
+  // }
+
+    if ( this.elementTobeCreated === 'inputfield') {
+      const inputElemObj = this.inputFormGroup.value;
+      this.componentCreaterService.setElementTobeCreated(inputElemObj);
     }
-    if ( this.elementTobeCreated === 'textarea') {
-      const textAreaObj = this.textAreaFormGroup.value;
-      textAreaObj.type = this.elementTobeCreated;
-      this.componentCreaterService.setElementTobeCreated(textAreaObj);
-  }
+
+    if ( this.elementTobeCreated === 'radio' ) {
+      const inputElemObj = this.radioFormGroup.value;
+      console.log(inputElemObj);
+      this.componentCreaterService.setElementTobeCreated(inputElemObj);
+    }
+
     // console.log('OBJECT : ', this.finalObjectTobeConverted);
     this.bsModalRef.hide();
   }

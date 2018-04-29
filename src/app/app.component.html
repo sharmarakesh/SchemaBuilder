@@ -17,14 +17,14 @@
 
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            <select (change)="selectedFiled($event)" [disabled]="!isFormCreated" name="" id="input${1/(\w+)/\u\1/g}" class="form-control" required="required">
-        <option value="label" disabled='true'>Create label field</option>
-        <option value="text">Create text field</option>
-        <option value="email" disabled='true'>Create email field</option>
-        <option value="textarea">Create textarea field</option>
-        <option value="radio">Create radio button</option>
-        <option value="password" disabled='true'>Create password field</option>
-      </select>
+            <select (change)="selectedFiled($event)" [(ngModel)]="selectedFieldsName" [disabled]="!isFormCreated" name="" id="input${1/(\w+)/\u\1/g}" class="form-control" required="required">
+              <option value="inputfield" >Create input field</option>
+              <!-- <option value="text">Create text field</option>
+              <option value="email" disabled='true'>Create email field</option>
+              <option value="textarea">Create textarea field</option> -->
+              <option value="radio">Create radio button</option>
+              <!-- <option value="password" disabled='true'>Create password field</option> -->
+            </select>
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
             <button type="button" (click)="createFormFields()" [disabled]="!isSelectedField" class="btn btn-default">Add Fields</button>
@@ -50,7 +50,30 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div #finalElements></div>
+            <!-- <div #finalElements></div> -->
+            <div *ngIf="elements">
+                <form>
+                    <label class="formHeading"><b>Registration Form</b></label>
+                    <div class="row" *ngFor="let element of elements">
+
+                        <div class="col-md-12">
+                            <div *ngIf="element.type !== 'radio'">
+                                <label [for]="element.id">{{ element.label }} </label>
+                                <input [type]="element.type" name="" [id]="element.id" class="form-control" value="" [placeholder]="element.placeholder" required="required" pattern="" title="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div *ngIf="element.type === 'radio'">
+                                <label>{{ element.label }} </label>
+                                <div class="radio-inline" *ngFor="let r of element.radioOptions">
+                                    <label><input [type]="element.type" [name]="element.name" [value]="r">{{ r }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

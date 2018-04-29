@@ -1,0 +1,26 @@
+<!-- <form [formGroup]="registrationFormGroup"> -->
+<!-- <div class="row">
+        <div class="col-md-12">
+            <label for="frmid">Select Input Type: </label>
+            <select (change)="selectedInputOnChange($event)" formControlName="type" class="form-control">
+              <option *ngFor="let opt of options" [value]="opt">{{ opt }}</option>
+          </select>
+        </div>
+    </div> -->
+<div class="row">
+    <div class="col-md-12">
+        <label for="frmid">{{ element.label }} </label>
+        <input [type]="element.type" name="" [id]="element.id" class="form-control" value="" [placeholder]="element.placeholder" required="required" pattern="" title="">
+    </div>
+    <!-- <div class="col-md-6">
+            <label for="frmname">Enter Label Value: </label>
+            <input type="text" name="frmname" id="frmname" class="form-control" formControlName="label" value="" required="required" pattern="" title="">
+        </div> -->
+</div>
+<!-- <div class="row">
+        <div class="col-md-12">
+            <label for="frmwidth">Enter Placeholder Value: </label>
+            <input type="text" name="frmwidth" id="frmwidth" formControlName="placeholder" class="form-control" value="" required="required" pattern="" title="">
+        </div>
+    </div> -->
+<!-- </form> -->
